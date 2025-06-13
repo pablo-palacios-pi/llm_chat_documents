@@ -26,6 +26,20 @@ def open_prompt(file_path: str):
     with open(file=doc_dir, mode="r", encoding="utf-8") as file:
         prompt = file.read()
         return prompt
+    
+
+
+@router_.post("/mini_rag")
+async def comparar_docus(file_1: UploadFile = File(...), file_2: UploadFile = File(...)):
+    if not file_1:
+        raise HTTPException(status_code=403, detail="Los campos no pueden estar vacíos")
+    elif not file_2:
+        raise HTTPException(status_code=403, detail="Los campos no pueden estar vacíos")
+    
+    prompt_summary = open_prompt("promptSystem_2.md")
+
+    answer_chat = await rag(file1=file_1.file, file2=file_2.file, system_prompt=prompt_summary)
+    return answer_chat
 
 # @router_.post("/chat_llm",status_code=status.HTTP_201_CREATED)
 # async def conversacion_llm(question: Questions):
@@ -82,14 +96,3 @@ async def add_document(title_1: str = Form(...), file_1: UploadFile = File(...),
     return answer_chat
 
 
-@router_.post("/mini_rag")
-async def comparar_docus(file_1: UploadFile = File(...), file_2: UploadFile = File(...)):
-    if not file_1:
-        raise HTTPException(status_code=403, detail="Los campos no pueden estar vacíos")
-    elif not file_2:
-        raise HTTPException(status_code=403, detail="Los campos no pueden estar vacíos")
-    
-    prompt_summary = open_prompt("promptSystem_2.md")
-
-    answer_chat = await rag(file1=file_1.file, file2=file_2.file, system_prompt=prompt_summary)
-    return answer_chat
