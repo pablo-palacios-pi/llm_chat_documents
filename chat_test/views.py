@@ -6,9 +6,9 @@ load_dotenv()
 
 
 client = AzureOpenAI(
-    api_version="2025-01-01-preview",
-    azure_endpoint="https://ai-danielvallejosai0530531063088720.openai.azure.com/",
-    api_key="EARAfege87W1E3y9jdxiIxopGCUJkXclbIe3AgF55j4K8u6SW77eJQQJ99BDACHYHv6XJ3w3AAAAACOGYMCD",
+    api_version=os.getenv("API_VERSION_4_1"),
+    azure_endpoint=os.getenv("ENDPOINT_DANI"),
+    api_key=os.getenv("API_KEY_DANI"),
 )
 
 def armar_documento_docx():
