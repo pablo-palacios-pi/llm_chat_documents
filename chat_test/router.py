@@ -1,13 +1,8 @@
 from fastapi import APIRouter, HTTPException, status, UploadFile,File,Form
 from pydantic import BaseModel
 from views import get_answer,rag
-#from s_kernel.multi_agents import get_message
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from PyPDF2 import PdfReader
 from langchain.prompts import PromptTemplate
-import docx2txt
-import tempfile
-import textract
 
 
 router_ = APIRouter()
