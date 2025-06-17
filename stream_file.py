@@ -9,8 +9,8 @@ st.set_page_config(page_title="Comparador", layout="centered")
 
 st.title("📄 Comparar Documentos ")
 
-file1 = st.file_uploader("📁 Subí el primer documento", type=["pdf", "docx", "txt"])
-file2 = st.file_uploader("📁 Subí el segundo documento", type=["pdf", "docx", "txt"])
+file1 = st.file_uploader("📁 Subí el primer documento", type=["pdf", "docx", "txt", "doc"])
+file2 = st.file_uploader("📁 Subí el segundo documento", type=["pdf", "docx", "txt", "doc"])
 
 if st.button("Comparar Documentos"):
     if not file1 or not file2:
