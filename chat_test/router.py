@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, status, UploadFile,File,Form
 from pydantic import BaseModel
-from views import get_answer,rag
-from PyPDF2 import PdfReader
-from langchain.prompts import PromptTemplate
+from .views import get_answer,rag
+#from PyPDF2 import PdfReader
+#from langchain.prompts import PromptTemplate
 
 
 router_ = APIRouter()
@@ -21,6 +21,11 @@ def open_prompt(file_path: str):
     with open(file=doc_dir, mode="r", encoding="utf-8") as file:
         prompt = file.read()
         return prompt
+    
+    
+@router_.get("/")
+async def root():
+    return {"message":"Bienvenido al Backend"}
     
 
 
@@ -53,41 +58,41 @@ async def comparar_docus(file_1: UploadFile = File(...), file_2: UploadFile = Fi
 
 
 
-@router_.post("/upload_file")
-async def add_document(title_1: str = Form(...), file_1: UploadFile = File(...),title_2: str = Form(...), file_2: UploadFile = File(...)):
+# @router_.post("/upload_file")
+# async def add_document(title_1: str = Form(...), file_1: UploadFile = File(...),title_2: str = Form(...), file_2: UploadFile = File(...)):
     
-    if not title_1 or not file_1:
-        raise HTTPException(status_code=403, detail="Los campos no pueden estar vacíos")
-    elif not title_2 or not file_2:
-        raise HTTPException(status_code=403, detail="Los campos no pueden estar vacíos")
+#     if not title_1 or not file_1:
+#         raise HTTPException(status_code=403, detail="Los campos no pueden estar vacíos")
+#     elif not title_2 or not file_2:
+#         raise HTTPException(status_code=403, detail="Los campos no pueden estar vacíos")
     
 
-    reader = PdfReader(file_1.file)
+#     reader = PdfReader(file_1.file)
 
-    text_1 = ""
-    for page in reader.pages:
-        text_1 += page.extract_text()
-
-
-    reader_2 = PdfReader(file_2.file)
-
-    text_2 = ""
-    for page_2 in reader_2.pages:
-        text_2 += page_2.extract_text()
-
-    prompt_summary = open_prompt("promptSystem.md")
-
-    prompt = PromptTemplate(
-        input_variables=["document_a", "document_b"],
-        template=prompt_summary,
-    )
+#     text_1 = ""
+#     for page in reader.pages:
+#         text_1 += page.extract_text()
 
 
-    final_prompt = prompt.format(document_a=text_1,document_b=text_2)
+#     reader_2 = PdfReader(file_2.file)
 
-    print(final_prompt)
+#     text_2 = ""
+#     for page_2 in reader_2.pages:
+#         text_2 += page_2.extract_text()
 
-    answer_chat = await get_answer(system=final_prompt)
-    return answer_chat
+#     prompt_summary = open_prompt("promptSystem.md")
+
+#     prompt = PromptTemplate(
+#         input_variables=["document_a", "document_b"],
+#         template=prompt_summary,
+#     )
+
+
+#     final_prompt = prompt.format(document_a=text_1,document_b=text_2)
+
+#     print(final_prompt)
+
+#     answer_chat = await get_answer(system=final_prompt)
+#     return answer_chat
 
 

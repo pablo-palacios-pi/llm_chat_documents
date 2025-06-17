@@ -23,10 +23,10 @@ if st.button("Comparar Documentos"):
                 "file_2": (file2),
             }
 
-
+            #requests.get(url="http://backend:8081/api_test/")
             try:
                 response = requests.post(
-                    "http://127.0.0.1:8001/api_test/mini_rag", files=files
+                    url="http://backend:8081/api_test/mini_rag", files=files
                 )
 
                 if response.status_code == 200:
