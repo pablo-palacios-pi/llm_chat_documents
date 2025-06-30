@@ -55,11 +55,7 @@ Los documentos ya se encuentran guardados en el sistema del clients.
 
 ## 2. Detalle de las Diferencias
 
-###  Cambios Farmacológicos
-- "Paracetamol 500 mg cada 8 hs" → "Ibuprofeno 600 mg cada 6 hs"
-- "Amoxicilina 1 g" → "Amoxicilina 875 mg + Ácido clavulánico 125 mg"
-- "Clonazepam" → "Diazepam"
-- ...
+
 
 ###  Correcciones gramaticales y ortográficas
 - "debera administrarse" → "deberá administrarse"
